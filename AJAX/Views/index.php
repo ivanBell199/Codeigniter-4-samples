@@ -17,10 +17,14 @@
 
     <script>
         function updateWithAjax(el, event) {
-            event.preventDefault() // Prevent the default link behavior
+            // Prevent the default link behavior
+            // It will not be needed if I use button or another tag
+            event.preventDefault()
 
-            var url = el.getAttribute('href')
+            let url = el.getAttribute('href')
 
+            // For easy manipulations I can use GET. Then I only need to set
+            // appropriate URL and everything will be done in controller
             fetch(url, {
                     method: 'GET',
                     // Set headers according to the docs
@@ -29,6 +33,7 @@
                         "X-Requested-With": "XMLHttpRequest"
                     },
                 })
+                // In controller I send response as json
                 .then(response => response.json())
                 .then(data => {
                     // Update the content with the received HTML
